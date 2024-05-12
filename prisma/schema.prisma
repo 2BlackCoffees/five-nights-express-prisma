@@ -10,8 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model TodoItem {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  title  String
-  done   Boolean @default(false)
+model AccessTime {
+  id             String   @id             @default(auto()) @map("_id") @db.ObjectId
+  accepted_until BigInt   @default(0)
+  //done           Boolean  @default(false)
+	@@map("AccessTime")
 }
