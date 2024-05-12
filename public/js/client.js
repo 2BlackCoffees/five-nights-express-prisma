@@ -16,44 +16,33 @@ const apiFetch = async (url, method, body) => {
     return resp;
 };
 
-const initTodo = () => {
-    // INSERT handleTodoDelete HERE
+const initPlaytime = () => {
 
-    const renderTitle = ({ title, done }) => {
-        if (!done) return title;
-        return `<s>${title}</s>`;
-    };
-    const renderItem = ({ id, title, done }) => `
-        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
-            <input
-                class="form-check-input me-2"
-                type="checkbox"
-                value=""
-                ${done ? "checked" : ""}
-                onchange="handleTodoChange(event, '${id}')"
-            />
-            <div style="flex-grow: 1;">
-                ${renderTitle({ title, done })}
-            </div>
-            <!-- INSERT DELETE BUTTON HERE -->
-        </li>
-    `;
-    const noItems = `
-        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
-            <strong>No tasks yet. Try adding one.</strong>
-        </li>
-    `;
 
     const refreshList = () => {
         const doRefresh = async () => {
-            const list = document.querySelector("#todo-list");
+            const list = document.querySelector("#fivenights");
 
-            const resp = await apiFetch("/todos");
-            const todos = await resp.json();
-            if (todos.length === 0) {
-                list.innerHTML = noItems;
+            const resp = await apiFetch("/fivenights");
+            const fiveNights = await resp.json();
+            if (fiveNights.length === 0) {
+                list.innerHTML = `
+                <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
+                    <div style="flex-grow: 1;">
+                    Nothing to show
+                    </div>
+                </li>
+            `;
             } else {
-                list.innerHTML = todos.map(renderItem).join("");
+                list.innerHTML = `
+                <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
+                    <div style="flex-grow: 1;">
+                    ${fiveNights}
+                    </div>
+                </li>
+            `
+                
+                //fiveNights.map(renderItem).join("");
             }
         };
 
@@ -62,25 +51,15 @@ const initTodo = () => {
 
     const addItem = async () => {
         const input = document.querySelector("#add-input");
-        const title = input.value;
-        if (!title) return;
+        const playTime = input.value;
+        if (!playTime) return;
 
-        await apiFetch("/todos", "POST", { title, done: false });
+        await apiFetch("/fivenights", "POST", { playTime });
 
         input.value = "";
         refreshList();
     };
 
-    const handleTodoChange = (ev, id) => {
-        const doChange = async () => {
-            await apiFetch(`/todos/${id}`, "PATCH", { done: ev.target.checked });
-
-            refreshList();
-        }
-
-        doChange().catch(err => console.log("Error changing todo done state", err));
-    };
-    window.handleTodoChange = handleTodoChange;
 
     const form = document.querySelector("#todo-form");
     form.onsubmit = (ev) => {
@@ -92,4 +71,4 @@ const initTodo = () => {
     refreshList();
 }
 
-initTodo();
+initPlaytime();
