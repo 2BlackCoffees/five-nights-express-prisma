@@ -18,11 +18,22 @@ router.post("/", asyncMiddleware(async (req, res) => {
 
   const untilTime = Math.floor(new Date().getTime() / 1000 / 60) + timeMinutes;
 
-  const result = await prisma.AccessTime.create({
+  /*const result = await prisma.AccessTime.create({
     data: {
       until_time: untilTime
     }
-  });
+  });*/
+  const deleteUsers = await prisma.AccessTime.deleteMany({})
+  const result = await prisma.user.upsert({
+    where: {
+    },
+    update: {
+    },
+    create: {
+      until_time: untilTime,
+
+    },
+  })
   res.json(result);
 }));
 
