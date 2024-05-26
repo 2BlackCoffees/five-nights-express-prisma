@@ -18,23 +18,30 @@ router.post("/", asyncMiddleware(async (req, res) => {
 
   const untilTime = Math.floor(new Date().getTime() / 1000 / 60) + timeMinutes;
 
-  const result = await prisma.GameAccessTime.create({
-    data: {
-      until_time: untilTime
-    }
-  });
-  const deleteUsers = await prisma.GameAccessTime.deleteMany({})
-  /*const result = await prisma.user.upsert({
-    where: {
-    },
-    update: {
-    },
-    create: {
-      until_time: untilTime,
+  try {
+    const deleteUsers = await prisma.GameAccessTime.deleteMany({})
+    const result = await prisma.GameAccessTime.create({
+      data: {
+        until_time: untilTime
+      }
+    });
+    /*const result = await prisma.user.upsert({
+      where: {
+      },
+      update: {
+      },
+      create: {
+        until_time: untilTime,
 
-    },
-  })*/
-  res.json(result);
+      },
+    })*/
+    res.json(result);
+  } catch (e/*: unknown*/) { // <-- note `e` has explicit `unknown` type
+    console.error("In post:");
+    console.error(e);
+    res.json("");
+
+  }
 }));
 
 router.get('/', asyncMiddleware(async (req, res) => {
@@ -52,6 +59,8 @@ router.get('/', asyncMiddleware(async (req, res) => {
     })
     res.json(findTime);
   } catch (e/*: unknown*/) { // <-- note `e` has explicit `unknown` type
+    console.error("In Get:");
+    console.error(e);
     res.json("");
 
   }

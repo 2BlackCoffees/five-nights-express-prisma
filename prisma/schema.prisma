@@ -12,6 +12,5 @@ datasource db {
 
 model GameAccessTime {
   id             String   @id             @default(auto()) @map("_id") @db.ObjectId
-  until_time     BigInt   @default(0)
-	@@map("GameAccessTime")
+  until_time     Int   @default(0)
 }
