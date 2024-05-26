@@ -51,7 +51,7 @@ router.post("/", asyncMiddleware(async (req, res) => {
 router.get('/', asyncMiddleware(async (req, res) => {
   try {
     const now = Math.floor(new Date().getTime() / 1000 / 60);
-    const findTime = await prisma.GameAccessTime.findFirst({
+    const findTime = await prisma.GameAccessTime.findMany(/*{
       where: {
         until_time: {
               gt: now,
@@ -60,7 +60,7 @@ router.get('/', asyncMiddleware(async (req, res) => {
       orderBy: {
         until_time: 'desc',
       },
-    })
+    }*/);
     res.json(findTime);
     console.log("findTime:")
     console.log(findTime);
