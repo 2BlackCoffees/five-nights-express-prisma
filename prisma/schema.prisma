@@ -10,9 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model AccessTime {
+model GameAccessTime {
   id             String   @id             @default(auto()) @map("_id") @db.ObjectId
-  accepted_until BigInt   @default(0)
-  //done           Boolean  @default(false)
-	@@map("AccessTime")
+  until_time     BigInt   @default(0)
+	@@map("GameAccessTime")
 }
