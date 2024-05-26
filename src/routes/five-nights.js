@@ -36,7 +36,9 @@ router.post("/", asyncMiddleware(async (req, res) => {
       },
     })*/
     res.json(result);
+    console.log("result:")
     console.log(result);
+    console.log("res:")
     console.log(res);
   } catch (e/*: unknown*/) { // <-- note `e` has explicit `unknown` type
     console.error("In post:");
@@ -60,10 +62,12 @@ router.get('/', asyncMiddleware(async (req, res) => {
       },
     })
     res.json(findTime);
+    console.log("findTime:")
     console.log(findTime);
+    console.log("res:")
     console.log(res);
-    console.error(findTime);
-    console.error(res);
+    console.log("Done")
+
     
   } catch (e/*: unknown*/) { // <-- note `e` has explicit `unknown` type
     console.error("In Get:");
