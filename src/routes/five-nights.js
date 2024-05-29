@@ -17,9 +17,10 @@ router.post("/", asyncMiddleware(async (req, res) => {
   const { time_minutes: timeMinutes } = req.params;
 
   const untilTime = Math.floor(new Date().getTime() / 1000 / 60) + timeMinutes;
+  console.error("untilTime:", untilTime)
 
   try {
-    const deleteUsers = await prisma.GameAccessTime.deleteMany({})
+    //const deleteUsers = await prisma.GameAccessTime.deleteMany({})
     const result = await prisma.GameAccessTime.create({
       data: {
         until_time: untilTime
@@ -36,10 +37,10 @@ router.post("/", asyncMiddleware(async (req, res) => {
       },
     })*/
     res.json(result);
-    console.log("result:")
-    console.log(result);
-    console.log("res:")
-    console.log(res);
+    console.error("result:")
+    console.error(result);
+    console.error("res:")
+    console.error(res);
   } catch (e/*: unknown*/) { // <-- note `e` has explicit `unknown` type
     console.error("In post:");
     console.error(e);
@@ -62,11 +63,11 @@ router.get('/', asyncMiddleware(async (req, res) => {
       },
     }*/);
     res.json(findTime);
-    console.log("findTime:")
-    console.log(findTime);
-    console.log("res:")
-    console.log(res);
-    console.log("Done")
+    console.error("findTime:")
+    console.error(findTime);
+    console.error("res:")
+    console.error(res);
+    console.error("Done")
 
     
   } catch (e/*: unknown*/) { // <-- note `e` has explicit `unknown` type
