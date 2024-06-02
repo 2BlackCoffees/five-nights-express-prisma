@@ -10,7 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model GameAccessTime {
+model GameAccessTimeDBG {
   id             String   @id             @default(auto()) @map("_id") @db.ObjectId
   until_time     Int   @default(0)
+  text           String
 }

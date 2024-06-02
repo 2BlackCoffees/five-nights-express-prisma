@@ -20,14 +20,14 @@ router.post("/test", asyncMiddleware(async (req, res) => {
   console.error("untilTime:", untilTime)
 
   try {
-    // deleteUsers = await prisma.GameAccessTime.deleteMany({})
-    const result_dbg = await prisma.GameAccessTime.create({
+    // deleteUsers = await prisma.GameAccessTimeDBG.deleteMany({})
+    const result_dbg = await prisma.GameAccessTimeDBG.create({
       data: {
         until_time: timeMinutes,
         text: " In post: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
-    const result = await prisma.GameAccessTime.create({
+    const result = await prisma.GameAccessTimeDBG.create({
       data: {
         until_time: untilTime,
         text: " In post: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
@@ -59,13 +59,13 @@ router.post("/test", asyncMiddleware(async (req, res) => {
 router.get('/', asyncMiddleware(async (req, res) => {
   try {
     const now = Math.floor(new Date().getTime() / 1000 / 60);
-    const result = await prisma.GameAccessTime.create({
+    const result = await prisma.GameAccessTimeDBG.create({
       data: {
         until_time: untilTime,
         text: " In get: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
-    const findTime = await prisma.GameAccessTime.findMany(/*{
+    const findTime = await prisma.GameAccessTimeDBG.findMany(/*{
       where: {
         until_time: {
               gt: now,
@@ -93,7 +93,7 @@ router.get('/', asyncMiddleware(async (req, res) => {
 
 /*router.patch('/:id', asyncMiddleware(async (req, res) => {
   const { id } = req.params;
-  const updated = await prisma.GameAccessTime.update({
+  const updated = await prisma.GameAccessTimeDBG.update({
     where: { id },
     data: req.body,
   });
