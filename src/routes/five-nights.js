@@ -14,7 +14,7 @@ const asyncMiddleware = fn => (req, res, next) => {
 };
 
 router.post("/", asyncMiddleware(async (req, res) => {
-  const { time_minutes: timeMinutes } = req.params;
+  const timeMinutes = req.query.time_minutes;
 
   const untilTime = Math.floor(new Date().getTime() / 1000 / 60) + timeMinutes;
   console.error("untilTime:", untilTime)
