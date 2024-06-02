@@ -20,17 +20,17 @@ router.post("/test", asyncMiddleware(async (req, res) => {
   console.error("untilTime:", untilTime)
 
   try {
-    //const deleteUsers = await prisma.GameAccessTime.deleteMany({})
+    const deleteUsers = await prisma.GameAccessTime.deleteMany({})
     const result_dbg = await prisma.GameAccessTime.create({
       data: {
         until_time: timeMinutes,
-        text: " In get: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
+        text: " In post: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
     const result = await prisma.GameAccessTime.create({
       data: {
         until_time: untilTime,
-        text: " In get: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
+        text: " In post: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
     /*const result = await prisma.user.upsert({
@@ -59,6 +59,12 @@ router.post("/test", asyncMiddleware(async (req, res) => {
 router.get('/', asyncMiddleware(async (req, res) => {
   try {
     const now = Math.floor(new Date().getTime() / 1000 / 60);
+    const result = await prisma.GameAccessTime.create({
+      data: {
+        until_time: untilTime,
+        text: " In get: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
+      }
+    });
     const findTime = await prisma.GameAccessTime.findMany(/*{
       where: {
         until_time: {
