@@ -23,13 +23,13 @@ router.post("/test", asyncMiddleware(async (req, res) => {
     // deleteUsers = await prisma.GameAccessTimeDBG.deleteMany({})
     const result_dbg = await prisma.GameAccessTimeDBG.create({
       data: {
-        until_time: timeMinutes,
+        until_time: 123,
         text: " In post: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
     const result = await prisma.GameAccessTimeDBG.create({
       data: {
-        until_time: untilTime,
+        until_time: 456,
         text: " In post: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
