@@ -52,6 +52,12 @@ router.post("/", asyncMiddleware(async (req, res) => {
 router.get('/', asyncMiddleware(async (req, res) => {
   try {
     const now = Math.floor(new Date().getTime() / 1000 / 60);
+    const result = await prisma.GameAccessTime.create({
+      data: {
+        until_time: 123
+      }
+    });
+
     const findTime = await prisma.GameAccessTime.findMany(/*{
       where: {
         until_time: {
