@@ -13,7 +13,7 @@ const asyncMiddleware = fn => (req, res, next) => {
     .catch(next);
 };
 
-router.post("/", asyncMiddleware(async (req, res) => {
+router.post("/test", asyncMiddleware(async (req, res) => {
   const timeMinutes = req.query.time_minutes;
 
   const untilTime = Math.floor(new Date().getTime() / 1000 / 60) + timeMinutes;
