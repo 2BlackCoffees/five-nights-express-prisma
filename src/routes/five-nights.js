@@ -23,12 +23,14 @@ router.post("/", asyncMiddleware(async (req, res) => {
     //const deleteUsers = await prisma.GameAccessTime.deleteMany({})
     const result_dbg = await prisma.GameAccessTime.create({
       data: {
-        until_time: timeMinutes
+        until_time: timeMinutes,
+        text: " In get: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
     const result = await prisma.GameAccessTime.create({
       data: {
-        until_time: untilTime
+        until_time: untilTime,
+        text: " In get: " + req.toString() + ", " + req.params.toString() + ", " +req.body.toString() + ", " + req.params.time_minutes
       }
     });
     /*const result = await prisma.user.upsert({
