@@ -21,6 +21,11 @@ router.post("/", asyncMiddleware(async (req, res) => {
 
   try {
     //const deleteUsers = await prisma.GameAccessTime.deleteMany({})
+    const result_dbg = await prisma.GameAccessTime.create({
+      data: {
+        until_time: timeMinutes
+      }
+    });
     const result = await prisma.GameAccessTime.create({
       data: {
         until_time: untilTime
@@ -52,12 +57,6 @@ router.post("/", asyncMiddleware(async (req, res) => {
 router.get('/', asyncMiddleware(async (req, res) => {
   try {
     const now = Math.floor(new Date().getTime() / 1000 / 60);
-    const result = await prisma.GameAccessTime.create({
-      data: {
-        until_time: 123
-      }
-    });
-
     const findTime = await prisma.GameAccessTime.findMany(/*{
       where: {
         until_time: {
