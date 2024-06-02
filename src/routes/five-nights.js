@@ -20,7 +20,7 @@ router.post("/test", asyncMiddleware(async (req, res) => {
   console.error("untilTime:", untilTime)
 
   try {
-    const deleteUsers = await prisma.GameAccessTime.deleteMany({})
+    // deleteUsers = await prisma.GameAccessTime.deleteMany({})
     const result_dbg = await prisma.GameAccessTime.create({
       data: {
         until_time: timeMinutes,
